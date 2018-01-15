@@ -5,7 +5,7 @@ class Entity {
 	constructor(world, x, y, color, type=ENTITY_UNDEFINED) {
 		this.world = world;
 
-		this.pos = new vec2(x, y);
+		this.pos = new Vec2(x, y);
 		this.color = color;
 		this.type = type;
 

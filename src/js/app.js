@@ -24,7 +24,7 @@ class App {
 		this.screen = new Screen(canvas, WIDTH, HEIGHT);
 		this.controller = new Controller();
 
-		this.world = new World(this);
+		this.world = new MSWorld(this);
 
 		document.addEventListener("keydown", (event) => this.controller.handleEvent(event, true ));
 		document.addEventListener("keyup",   (event) => this.controller.handleEvent(event, false));
@@ -86,6 +86,7 @@ class App {
 	}
 
 	render() {
+		this.clear();
 		this.world.render();
 		this.screen.drawToScreen();
 	}

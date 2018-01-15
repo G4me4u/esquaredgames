@@ -25,6 +25,11 @@ class World {
 		this.gameOverAnim = 4;
 	}
 
+	setGameOver(win) {
+		this.gameOver = true;
+		this.wonGame = win;
+	}
+
 	addEntity(entity) {
 		this.entities.push(entity);
 	}
@@ -70,7 +75,7 @@ class World {
 	}
 
 	renderGameOver() {
-		if (this.time % this.gameOverAnim >= (this.gameOverAnim >> 1))
+		if ((this.time % this.gameOverAnim) >= (this.gameOverAnim >> 1))
 			return;
 		this.app.clear(this.wonGame ? COLOR_GREEN : COLOR_RED);
 	}
