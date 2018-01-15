@@ -3,6 +3,7 @@ class App {
 
 	constructor() {
 		this.screen = null;
+		this.timer = null;
 	
 		this.running = false;
 	}
@@ -14,7 +15,8 @@ class App {
 			return false;
 		}
 
-		this.screen = new Screen(canvas, 10, 10);
+		this.screen = new Screen(canvas, WIDTH, HEIGHT);
+		this.timer = new Timer(TPS, DEBUG);
 
 		return true;
 	}
@@ -27,6 +29,8 @@ class App {
 		logger.info("Launch successful!");
 
 		this.running = true;
+
+		this.timer.init();
 		this.loop();
 	}
 
@@ -34,9 +38,25 @@ class App {
 		if (!this.running)
 			return;
 
-		this.screen.setPixel(0, 0, BLUE);
-		this.screen.setPixel(0, 1, RED);
-		this.screen.setPixel(1, 1, MAGENTA);
+		this.timer.clock();
+
+		while (this.timer.missingTicks > 0) {
+			this.tick();
+			this.timer.tickPassed();
+		}
+
+		this.draw();
+		this.timer.framePassed();
+
+		this.timer.timeout(() => this.loop(), FPS);
+	}
+
+	tick() {
+
+	}
+
+	draw() {
+
 
 		this.screen.drawToScreen();
 	}

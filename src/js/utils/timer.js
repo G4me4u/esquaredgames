@@ -43,7 +43,7 @@ class Timer {
 			if (this.ds >= 1.0) {
 				this.ds -= 1.0;
 				if (this.ds >= 1.0)
-					this.ds = 0;
+					this.ds = 0.0;
 				
 				logger.info("Tps: " + this.ticks + " Fps: " + this.frames);
 				
@@ -69,7 +69,7 @@ class Timer {
 			minFps -= (minFps % this.tps);
 		} else minFps = this.tps;
 		
-		const msToSleep = Math.floor(1000 / minFps) - msPassed;
+		const msToSleep = Math.floor(1000 / (minFps + 1)) - msPassed;
 		setTimeout(callback, msToSleep > 0 ? msToSleep : 0);
 	}
 }
