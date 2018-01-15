@@ -8,11 +8,11 @@ class Screen {
 		this.width = width;
 		this.height = height;
 
-		this.pixels = makeArray(width * height);
+		this.pixels = makeArray(width * height, COLOR_BLACK);
 	}
 
 	setPixel(px, py, color) {
-		this.pixels[px + py * this.width] = color;
+		this.pixels[px + py * this.width] = color ? color : COLOR_BLACK;
 	}
 
 	getPixel(px, py) {
@@ -31,9 +31,7 @@ class Screen {
 		for (let px = 0; px < this.width; px++) {
 			for (let py = 0; py < this.height; py++) {
 				let color = this.getPixel(px, py);
-				if (!color)
-					color = BLACK;
-
+				
 				const cx = px * d + r + PIXEL_MARGIN;
 				const cy = py * d + r + PIXEL_MARGIN;
 

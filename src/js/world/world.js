@@ -48,6 +48,22 @@ class World {
 		this.app.setPixel(entity.pos.x, entity.pos.y, entity.color);
 	}
 
+	update() {
+		this.time++;
+
+		if (this.gameOver)
+			return;
+
+		let i = this.entities.length - 1;
+		while (i >= 0) {
+			const ent = this.entities[i];
+			ent.update();
+			if (ent.dead) {
+				this.entities.pop(i);
+			} else i--;
+		}
+	}
+
 	renderGame() {
 		for (let ent of this.entities)
 			this.renderEntity(ent);

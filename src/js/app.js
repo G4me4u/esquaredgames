@@ -6,6 +6,8 @@ class App {
 
 		this.screen = null;
 		this.controller = null;
+
+		this.world = null;
 	
 		this.running = false;
 	}
@@ -21,6 +23,8 @@ class App {
 
 		this.screen = new Screen(canvas, WIDTH, HEIGHT);
 		this.controller = new Controller();
+
+		this.world = new World(this);
 
 		document.addEventListener("keydown", (event) => this.controller.handleEvent(event, true ));
 		document.addEventListener("keyup",   (event) => this.controller.handleEvent(event, false));
@@ -78,14 +82,11 @@ class App {
 
 	update() {
 		this.controller.update();
+		this.world.update();
 	}
 
 	render() {
-		this.screen.setPixel(0, 0, BLUE);
-		this.screen.setPixel(0, 1, RED);
-		this.screen.setPixel(1, 0, GREEN);
-		this.screen.setPixel(1, 1, MAGENTA);
-
+		this.world.render();
 		this.screen.drawToScreen();
 	}
 }
