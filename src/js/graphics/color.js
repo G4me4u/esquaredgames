@@ -5,13 +5,7 @@ class Color {
 		this.r = r;
 		this.g = g;
 		this.b = b;
-
-		this.style = "";
-
-		this.updateStyle();
-	}
-
-	updateStyle() {
+		
 		this.style = `rgb(${this.r},${this.g},${this.b})`;
 	}
 
