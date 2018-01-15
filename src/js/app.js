@@ -62,7 +62,7 @@ class App {
 		this.screen.setPixel(px, py, color);
 	}
 
-	clear(color=BLACK) {
+	clear(color=COLOR_BLACK) {
 		for (let py = 0; py < HEIGHT; py++)
 			for (let px = 0; px < WIDTH; px++)
 				this.setPixel(px, py, color);

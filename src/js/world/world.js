@@ -56,7 +56,7 @@ class World {
 	renderGameOver() {
 		if (this.time % this.gameOverAnim >= (this.gameOverAnim >> 1))
 			return;
-		this.app.clear(this.wonGame ? GREEN : RED);
+		this.app.clear(this.wonGame ? COLOR_GREEN : COLOR_RED);
 	}
 
 	render() {
@@ -66,4 +66,4 @@ class World {
 			this.renderGame();
 		}
 	}
-};
+}
