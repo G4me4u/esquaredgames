@@ -27,6 +27,14 @@ class Timer {
 		this.ticks = 0;
 		this.frames = 0;
 	}
+
+	setTps(tps) {
+		this.tps = tps;
+	}
+
+	incrementTps(deltaTps) {
+		this.tps += deltaTps;
+	}
 	
 	clock() {
 		let now = Date.now();
