@@ -1,5 +1,5 @@
 const MS_CURSOR_TOGGLE = 16;
-const MS_NUM_BOMBS = 8;
+const MS_NUM_BOMBS = 16;
 
 const MS_TILE_COLOR = new Color(196, 196, 196);
 const MS_BOMB_COLOR = new Color( 64,  64,  64);
@@ -11,7 +11,7 @@ const MS_SURROUNDING_COLORS = [
 	new Color( 64, 196,  64), // Green
 	new Color(196,  32,  32), // Red
 	new Color(128,  32, 196), // Purple
-	new Color(165,  56,  42), // Brown
+	new Color(155,  56,  42), // Brown
 	new Color( 64, 128, 128), // Cyan
 	new Color( 64,  64,  64), // Grey
 	new Color(196, 128,  64)  // Orange
