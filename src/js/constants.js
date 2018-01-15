@@ -4,6 +4,8 @@ const DEBUG = true;
 const WIDTH  = 10;
 const HEIGHT = 10;
 
+const PIXEL_MARGIN = 2;
+
 // Timing
 const TPS = 20.0;
 const FPS = 60.0;

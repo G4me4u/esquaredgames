@@ -23,13 +23,24 @@ class Screen {
 		const pw = Math.floor(this.canvas.width  / this.width );
 		const ph = Math.floor(this.canvas.height / this.height);
 
+		const r = Math.min(pw, ph) >> 1;
+		const d = r << 1;
+
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
 		for (let px = 0; px < this.width; px++) {
 			for (let py = 0; py < this.height; py++) {
 				let color = this.getPixel(px, py);
 				if (!color)
 					color = BLACK;
+
+				const cx = px * d + r + PIXEL_MARGIN;
+				const cy = py * d + r + PIXEL_MARGIN;
+
+				this.ctx.beginPath();
+				this.ctx.arc(cx, cy, r - PIXEL_MARGIN, 0, 2 * Math.PI, false);
 				this.ctx.fillStyle = color.style;
-				this.ctx.fillRect(px * pw, py * ph, pw, ph);
+				this.ctx.fill();
 			}
 		}
 	}
