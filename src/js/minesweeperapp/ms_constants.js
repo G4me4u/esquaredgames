@@ -9,7 +9,7 @@ const MS_CURS_COLOR = new Color(255,   0, 255);
 const MS_SURROUNDING_COLORS = [
 	new Color( 48,  48, 196), // Blue
 	new Color( 64, 196,  64), // Green
-	new Color(196,  64,  64), // Red
+	new Color(196,  32,  32), // Red
 	new Color(128,  32, 196), // Purple
 	new Color(165,  56,  42), // Brown
 	new Color( 64, 128, 128), // Cyan
