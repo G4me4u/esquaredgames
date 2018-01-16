@@ -147,7 +147,9 @@ class MSWorld extends World {
 	update() {
 		super.update();
 
-		if (!this.gameOver) {
+		const middleInput = this.app.controller.getInput(KEY_MIDDLE);
+		
+		if (!this.gameOver && !middleInput.pressed) {
 			for (let i = 0; i < this.controls.length; i++) {
 				if (this.app.controller.getInput(this.controls[i]).clicked()) {
 					const direction = this.dirs[i];
@@ -171,7 +173,6 @@ class MSWorld extends World {
 			}
 		}
 
-		const middleInput = this.app.controller.getInput(KEY_MIDDLE);
 		if (this.flagTimer < MS_FLAG_DELAY && middleInput.released()) {
 			if (!this.gameOver) {
 				if (!this.getTile(this.curX, this.curY).flag) {	
