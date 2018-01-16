@@ -17,7 +17,7 @@ class Input {
 			if (!this.wasReleased || !repeat) {	
 				this.when = when;
 				this.pressed = true;
-				this.wasPressed = false;
+				this.wasPressed = this.wasPressed && repeat;
 				this.wasReleased = false;
 			}
 		} else {
