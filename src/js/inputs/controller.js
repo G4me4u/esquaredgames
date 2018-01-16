@@ -31,9 +31,9 @@ class Controller {
 			this.controls[control].update();
 	
 		while (this.events.length > 0) {
-			const event = this.events.pop();
+			const event = this.events.pop(0);
 			const input = this.controls[event.control];
-			input.setPressed(event.pressed, event.when);
+			input.setPressed(event.pressed, event.repeat, event.when);
 		}
 	}
 
@@ -42,7 +42,13 @@ class Controller {
 			return;
 
 		const control = this.codeToControl[event.keyCode];
-		this.events.push({ control, pressed, when: Date.now() });
+		
+		this.events.push({ 
+			control: control, 
+			pressed: pressed, 
+			repeat: event.repeat, 
+			when: Date.now() 
+		});
 	}
 
 	getInput(control) {

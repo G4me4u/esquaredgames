@@ -12,11 +12,14 @@ class Input {
 		this.when = -1;
 	}
 
-	setPressed(state, when) {
+	setPressed(state, repeat, when) {
 		if (state) {
-			this.when = when;
-			this.pressed = true;
-			this.wasReleased = false;
+			if (!this.wasReleased || !repeat) {	
+				this.when = when;
+				this.pressed = true;
+				this.wasPressed = false;
+				this.wasReleased = false;
+			}
 		} else {
 			this.wasReleased = true;
 		}
