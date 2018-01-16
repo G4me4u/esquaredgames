@@ -26,6 +26,7 @@ class MSWorld extends World {
 		this.curY = HEIGHT >> 1;
 
 		this.cursTimer = 0;
+		this.flagTimer = 0;
 
 		this.tiles = [];
 		this.initTiles();
@@ -61,6 +62,10 @@ class MSWorld extends World {
 		}
 	}
 
+	getTile(xt, yt) {
+		return this.tiles[xt + yt * WIDTH];
+	}
+
 	getNumSurrounding(x, y) {
 		let n = 0;
 
@@ -92,9 +97,7 @@ class MSWorld extends World {
 	}
 
 	clickTile(x, y) {
-		const tile = this.tiles[x + y * WIDTH];
-
-		if (tile.bomb) {	
+		if (this.getTile(x, y).bomb) {	
 			this.setGameOver(false);
 			return;
 		}
@@ -103,7 +106,7 @@ class MSWorld extends World {
 	}
 
 	revealSurroundingTiles(x, y) {
-		let t = this.tiles[x + y * WIDTH];
+		let t = this.getTile(x, y);
 		if (t.visible)
 			return;
 		t.setVisible();
@@ -168,15 +171,22 @@ class MSWorld extends World {
 			}
 		}
 
-		if (this.app.controller.getInput(KEY_MIDDLE).clicked()) {
+		const middleInput = this.app.controller.getInput(KEY_MIDDLE);
+		if (this.flagTimer < MS_FLAG_DELAY && middleInput.released()) {
 			if (!this.gameOver) {
-				this.clickTile(this.curX, this.curY);
-				this.checkWin();
+				if (!this.getTile(this.curX, this.curY).flag) {	
+					this.clickTile(this.curX, this.curY);
+					this.checkWin();
+				}
 			} else {
 				this.reset();
 			}
 			return;
-		}
+		} else if (middleInput.pressed && !this.gameOver) {
+			if (this.flagTimer == MS_FLAG_DELAY)
+				this.getTile(this.curX, this.curY).toggleFlag();
+			this.flagTimer++;
+		} else this.flagTimer = 0;
 
 		this.cursTimer++;
 	}
@@ -195,7 +205,7 @@ class MSWorld extends World {
 						color = MS_SURROUNDING_COLORS[tile.numSurrounding - 1];
 					}
 				} else {
-					color = MS_TILE_COLOR;
+					color = tile.flag ? MS_FLAG_COLOR : MS_TILE_COLOR;
 				}
 
 				this.app.setPixel(x, y, color);
