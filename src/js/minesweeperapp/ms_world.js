@@ -63,41 +63,36 @@ class MSWorld extends World {
 	}
 
 	getTile(xt, yt) {
+		if (xt < 0 || xt >= WIDTH)
+			return null;
+		if (yt < 0 || yt >= HEIGHT)
+			return null;
 		return this.tiles[xt + yt * WIDTH];
+	}
+
+	isBomb(xt, yt) {
+		let t;
+		return (t = this.getTile(xt, yt)) && t.bomb;
 	}
 
 	getNumSurrounding(x, y) {
 		let n = 0;
 
-		const index = x + y * WIDTH;
-		if (x > 0) {
-			if (this.tiles[index - 1].bomb)
-				n++;
-			if (y > 0 && this.tiles[index - WIDTH - 1].bomb)
-				n++;
-			if (y + 1 < HEIGHT && this.tiles[index + WIDTH - 1].bomb)
-				n++;
-		}
+		if (this.isBomb(x - 1, y)) n++;
+		if (this.isBomb(x + 1, y)) n++;
+		if (this.isBomb(x, y - 1)) n++;
+		if (this.isBomb(x, y + 1)) n++;
 
-		if (x + 1 < WIDTH) {
-			if (this.tiles[index + 1].bomb)
-				n++;
-			if (y > 0 && this.tiles[index - WIDTH + 1].bomb)
-				n++;
-			if (y + 1 < HEIGHT && this.tiles[index + WIDTH + 1].bomb)
-				n++;
-		}
-
-		if (y > 0 && this.tiles[index - WIDTH].bomb)
-			n++;
-		if (y + 1 < HEIGHT && this.tiles[index + WIDTH].bomb)
-			n++;
+		if (this.isBomb(x - 1, y - 1)) n++;
+		if (this.isBomb(x - 1, y + 1)) n++;
+		if (this.isBomb(x + 1, y - 1)) n++;
+		if (this.isBomb(x + 1, y + 1)) n++;
 
 		return n;
 	}
 
 	clickTile(x, y) {
-		if (this.getTile(x, y).bomb) {	
+		if (this.getTile(x, y).bomb) { 
 			this.setGameOver(false);
 			return;
 		}
@@ -107,33 +102,22 @@ class MSWorld extends World {
 
 	revealSurroundingTiles(x, y) {
 		let t = this.getTile(x, y);
-		if (t.visible)
+		if (t == null || t.visible)
 			return;
 		t.setVisible();
 
 		if (t.numSurrounding > 0)
 			return;
 
-		if (x > 0) {
-			this.revealSurroundingTiles(x - 1, y);
-			if (y > 0)
-				this.revealSurroundingTiles(x - 1, y - 1);
-			if (y + 1 < HEIGHT)
-				this.revealSurroundingTiles(x - 1, y + 1);
-		}
-
-		if (x + 1 < WIDTH) {
-			this.revealSurroundingTiles(x + 1, y);
-			if (y > 0)
-				this.revealSurroundingTiles(x + 1, y - 1);
-			if (y + 1 < HEIGHT)
-				this.revealSurroundingTiles(x + 1, y + 1);
-		}
-
-		if (y > 0)
-			this.revealSurroundingTiles(x, y - 1);
-		if (y + 1 < HEIGHT)
-			this.revealSurroundingTiles(x, y + 1);
+		this.revealSurroundingTiles(x - 1, y);
+		this.revealSurroundingTiles(x + 1, y);
+		this.revealSurroundingTiles(x, y - 1);
+		this.revealSurroundingTiles(x, y + 1);
+		
+		this.revealSurroundingTiles(x - 1, y - 1);
+		this.revealSurroundingTiles(x - 1, y + 1);
+		this.revealSurroundingTiles(x + 1, y - 1);
+		this.revealSurroundingTiles(x + 1, y + 1);
 	}
 
 	checkWin() {
@@ -153,18 +137,8 @@ class MSWorld extends World {
 			for (let i = 0; i < this.controls.length; i++) {
 				if (this.app.controller.getInput(this.controls[i]).clicked()) {
 					const direction = this.dirs[i];
-					this.curX += direction.x;
-					this.curY += direction.y;
-				
-					if (this.curX < 0)
-						this.curX = 0;
-					else if (this.curX >= WIDTH)
-						this.curX = WIDTH - 1;
-
-					if (this.curY < 0)
-						this.curY = 0;
-					else if (this.curY >= HEIGHT)
-						this.curY = HEIGHT - 1;
+					this.curX = clamp(0, WIDTH  - 1, this.curX + direction.x);
+					this.curY = clamp(0, HEIGHT - 1, this.curY + direction.y);
 
 					this.cursTimer = 0;
 
@@ -181,8 +155,8 @@ class MSWorld extends World {
 				}
 			} else {
 				this.reset();
+				return;
 			}
-			return;
 		} else if (middleInput.pressed && !this.gameOver) {
 			if (this.flagTimer == MS_FLAG_DELAY)
 				this.getTile(this.curX, this.curY).toggleFlag();
@@ -214,6 +188,6 @@ class MSWorld extends World {
 		}
 
 		if ((this.cursTimer % MS_CURSOR_TOGGLE) < (MS_CURSOR_TOGGLE >> 1))
-			this.app.setPixel(this.curX, this.curY, MS_CURS_COLOR)
+			this.app.setPixel(this.curX, this.curY, MS_CURS_COLOR);
 	}
 }

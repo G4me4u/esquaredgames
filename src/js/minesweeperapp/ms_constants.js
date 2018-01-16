@@ -1,5 +1,5 @@
 const MS_CURSOR_TOGGLE = 16;
-const MS_NUM_BOMBS     = 16;
+const MS_NUM_BOMBS     =  8;
 
 const MS_FLAG_DELAY    = 10;
 

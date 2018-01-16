@@ -17,7 +17,7 @@ class Input {
 			if (!this.wasReleased || !repeat) {	
 				this.when = when;
 				this.pressed = true;
-				this.wasPressed = this.wasPressed && repeat;
+				this.wasPressed &= repeat;
 				this.wasReleased = false;
 			}
 		} else {
@@ -36,6 +36,6 @@ class Input {
 	}
 
 	released() {
-		return !this.pressed && this.wasPressed;
+		return this.wasReleased && this.pressed;
 	}
 }
