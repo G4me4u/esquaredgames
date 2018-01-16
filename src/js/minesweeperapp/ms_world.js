@@ -103,9 +103,7 @@ class MSWorld extends World {
 	}
 
 	revealSurroundingTiles(x, y) {
-		const index = x + y * WIDTH;
-
-		let t = this.tiles[index];
+		let t = this.tiles[x + y * WIDTH];
 		if (t.visible)
 			return;
 		t.setVisible();
@@ -115,7 +113,6 @@ class MSWorld extends World {
 
 		if (x > 0) {
 			this.revealSurroundingTiles(x - 1, y);
-
 			if (y > 0)
 				this.revealSurroundingTiles(x - 1, y - 1);
 			if (y + 1 < HEIGHT)
@@ -124,7 +121,6 @@ class MSWorld extends World {
 
 		if (x + 1 < WIDTH) {
 			this.revealSurroundingTiles(x + 1, y);
-
 			if (y > 0)
 				this.revealSurroundingTiles(x + 1, y - 1);
 			if (y + 1 < HEIGHT)

@@ -1,8 +1,8 @@
 const DEBUG = true;
 
 // Screen size
-const WIDTH  = 10;
-const HEIGHT = 10;
+const WIDTH  = 8;
+const HEIGHT = 8;
 
 const PIXEL_MARGIN = 2;
 

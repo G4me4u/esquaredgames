@@ -1,2 +1,2 @@
-# tenxtengames
-A simple game engine for sime 2D 10x10 pixel based "joystick" games. Good testbed for Sense HAT games (Raspberry PI))
+# ExEgames
+A game engine for simple 2D 8x8 pixel based "joystick" games. Good testbed for Sense HAT games (Raspberry PI))
