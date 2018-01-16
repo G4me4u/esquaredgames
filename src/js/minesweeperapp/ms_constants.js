@@ -1,5 +1,5 @@
 const MS_CURSOR_TOGGLE = 16;
-const MS_NUM_BOMBS     = 16;
+const MS_NUM_BOMBS     =  8;
 
 const MS_TILE_COLOR = new Color(218, 218, 218);
 const MS_BOMB_COLOR = new Color( 64,  64,  64);
