@@ -28,13 +28,14 @@ class MSWorld extends World {
 		this.cursTimer = 0;
 		this.flagTimer = 0;
 
-		this.tiles = [];
-		this.initTiles();
+		this.initTiles(this.curX, this.curY);
 	
 		this.gameOverAnim = 20;
 	}
 
-	initTiles() {
+	initTiles(xd, yd) {
+		this.tiles = [];
+
 		const numTiles = WIDTH * HEIGHT;
 		while (this.tiles.push(new MSTile()) < numTiles);
 
@@ -42,12 +43,15 @@ class MSWorld extends World {
 		while (bombCount < MS_NUM_BOMBS) {
 			const x = Math.floor(Math.random() * WIDTH);
 			const y = Math.floor(Math.random() * HEIGHT);
-			const index = x + y * WIDTH;
+			
+			if (x != xd || y != yd) {
+				const index = x + y * WIDTH;
 
-			const tile = this.tiles[index];
-			if (!tile.bomb) {
-				tile.bomb = true;
-				bombCount++;
+				const tile = this.tiles[index];
+				if (!tile.bomb) {
+					tile.bomb = true;
+					bombCount++;
+				}
 			}
 		}
 
@@ -92,7 +96,11 @@ class MSWorld extends World {
 	}
 
 	clickTile(x, y) {
-		if (this.getTile(x, y).bomb) { 
+		if (this.firstMove) {
+			if (this.isBomb(x, y))
+				this.initTiles(x, y);
+			this.firstMove = false;
+		} else if (this.isBomb(x, y)) { 
 			this.setGameOver(false);
 			return;
 		}
