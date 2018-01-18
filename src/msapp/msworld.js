@@ -14,15 +14,14 @@ class MSWorld extends ESTileWorld {
 		this.cursor.setPos(WIDTH >> 1, HEIGHT >> 1);
 	
 		this.gameOverAnim = TPS;
+		this.firstMove = true;
 	}
 
 	createTile() {
 		return new MSTile();
 	}
 
-	initTiles(xd=0, yd=0) {
-		super.initTiles();
-
+	generateBombs(xd, yd) {
 		let bombCount = 0;
 		while (bombCount < MS_NUM_BOMBS) {
 			const x = Math.floor(Math.random() * WIDTH);
@@ -73,8 +72,7 @@ class MSWorld extends ESTileWorld {
 
 	clickTile(x, y) {
 		if (this.firstMove) {
-			if (this.isBomb(x, y))
-				this.initTiles(x, y);
+			this.generateBombs(this.cursor.x, this.cursor.y);
 			this.firstMove = false;
 		} else if (this.isBomb(x, y)) { 
 			this.setGameOver(false);
