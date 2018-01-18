@@ -3,32 +3,17 @@ class MSWorld extends ESWorld {
 
 	constructor(app) {
 		super(app);
-		
-		this.controls = [ 
-			KEY_UP, 
-			KEY_RIGHT, 
-			KEY_DOWN, 
-			KEY_LEFT 
-		];
-
-		this.dirs = [ 
-			new ESVec2( 0, -1),
-			new ESVec2( 1,  0),
-			new ESVec2( 0,  1),
-			new ESVec2(-1,  0)
-		];
 	}
 
 	reset() {
 		super.reset();
 
-		this.curX = WIDTH >> 1;
-		this.curY = HEIGHT >> 1;
-
-		this.cursTimer = 0;
 		this.flagTimer = 0;
+		
+		this.cursor = new ESCursor(this.app, MS_CURS_COLOR, MS_CURSOR_TOGGLE);
+		this.cursor.setPos(WIDTH >> 1, HEIGHT >> 1);
 
-		this.initTiles(this.curX, this.curY);
+		this.initTiles(this.cursor.x, this.cursor.y);
 	
 		this.gameOverAnim = 20;
 	}
@@ -140,25 +125,13 @@ class MSWorld extends ESWorld {
 		super.update();
 
 		const middleInput = this.app.controller.getInput(KEY_MIDDLE);
-		
-		if (!this.gameOver && !middleInput.pressed) {
-			for (let i = 0; i < this.controls.length; i++) {
-				if (this.app.controller.getInput(this.controls[i]).clicked()) {
-					const direction = this.dirs[i];
-					this.curX = Math.clamp(0, WIDTH  - 1, this.curX + direction.x);
-					this.curY = Math.clamp(0, HEIGHT - 1, this.curY + direction.y);
-
-					this.cursTimer = 0;
-
-					break;
-				}
-			}
-		}
+		if (!this.gameOver && !middleInput.pressed)
+			this.cursor.update();
 
 		if (this.flagTimer < MS_FLAG_DELAY && middleInput.released()) {
 			if (!this.gameOver) {
-				if (!this.getTile(this.curX, this.curY).flag) {	
-					this.clickTile(this.curX, this.curY);
+				if (!this.getTile(this.cursor.x, this.cursor.y).flag) {	
+					this.clickTile(this.cursor.x, this.cursor.y);
 					this.checkWin();
 				}
 			} else {
@@ -167,11 +140,9 @@ class MSWorld extends ESWorld {
 			}
 		} else if (middleInput.pressed && !this.gameOver) {
 			if (this.flagTimer == MS_FLAG_DELAY)
-				this.getTile(this.curX, this.curY).toggleFlag();
+				this.getTile(this.cursor.x, this.cursor.y).toggleFlag();
 			this.flagTimer++;
 		} else this.flagTimer = 0;
-
-		this.cursTimer++;
 	}
 
 	renderGame() {
@@ -195,7 +166,7 @@ class MSWorld extends ESWorld {
 			}
 		}
 
-		if ((this.cursTimer % MS_CURSOR_TOGGLE) < (MS_CURSOR_TOGGLE >> 1))
-			this.app.setPixel(this.curX, this.curY, MS_CURS_COLOR);
+		if (this.flagTimer == 0)
+			this.cursor.render();
 	}
 }
