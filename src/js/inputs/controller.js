@@ -4,7 +4,7 @@ const KEY_RIGHT  = 2;
 const KEY_DOWN   = 3;
 const KEY_LEFT   = 4;
 
-class Controller {
+class ESController {
 
 	constructor() {
 		this.codeToControl = {
@@ -16,11 +16,11 @@ class Controller {
 		};
 
 		this.controls = {
-			0: new Input("middle", KEY_MIDDLE),
-			1: new Input("up", KEY_UP),
-			2: new Input("right", KEY_RIGHT),
-			3: new Input("down", KEY_DOWN),
-			4: new Input("left", KEY_LEFT)
+			0: new ESInput("middle", KEY_MIDDLE),
+			1: new ESInput("up", KEY_UP),
+			2: new ESInput("right", KEY_RIGHT),
+			3: new ESInput("down", KEY_DOWN),
+			4: new ESInput("left", KEY_LEFT)
 		};
 
 		this.events = [];

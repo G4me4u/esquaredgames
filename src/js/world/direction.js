@@ -1,5 +1,5 @@
 
-class Direction {
+class ESDirection {
 
 	constructor(name, id, opp, cw, ccw) {
 		this.name = name;
@@ -23,9 +23,9 @@ class Direction {
 	}
 }
 
-const DIR_UP    = new Direction("up",    0, 2, 1, 3);
-const DIR_RIGHT = new Direction("right", 1, 3, 2, 0);
-const DIR_DOWN  = new Direction("down",  2, 0, 3, 1);
-const DIR_LEFT  = new Direction("left",  3, 1, 0, 2);
+const DIR_UP    = new ESDirection("up",    0, 2, 1, 3);
+const DIR_RIGHT = new ESDirection("right", 1, 3, 2, 0);
+const DIR_DOWN  = new ESDirection("down",  2, 0, 3, 1);
+const DIR_LEFT  = new ESDirection("left",  3, 1, 0, 2);
 
 const directions = [ DIR_UP, DIR_RIGHT, DIR_DOWN, DIR_LEFT ];

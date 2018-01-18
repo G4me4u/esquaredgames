@@ -4,7 +4,7 @@ const LEVEL_ERROR = 2;
 const LEVEL_WARN = 3;
 const LEVEL_INFO = 4;
 
-class Logger {
+class ESLogger {
 	
 	constructor() {
 		this.level = LEVEL_INFO;
@@ -38,4 +38,4 @@ class Logger {
 	}
 }
 
-const logger = new Logger();
+const logger = new ESLogger();

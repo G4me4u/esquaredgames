@@ -1,5 +1,5 @@
 
-class World {
+class ESWorld {
 
 	constructor(app) {
 		this.app = app;

@@ -1,5 +1,5 @@
 
-class App {
+class ESApp {
 
 	constructor() {
 		this.timer = null;
@@ -19,10 +19,10 @@ class App {
 			return false;
 		}
 
-		this.timer = new Timer(TPS, DEBUG);
+		this.timer = new ESTimer(TPS, DEBUG);
 
-		this.screen = new Screen(canvas, WIDTH, HEIGHT);
-		this.controller = new Controller();
+		this.screen = new ESScreen(canvas, WIDTH, HEIGHT);
+		this.controller = new ESController();
 
 		this.world = new MSWorld(this);
 
@@ -92,4 +92,4 @@ class App {
 	}
 }
 
-new App().start();
+new ESApp().start();

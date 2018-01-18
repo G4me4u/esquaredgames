@@ -1,5 +1,5 @@
 
-class Vec2 {
+class ESVec2 {
 
 	constructor(x=0.0, y=0.0) {
 		this.x = x;
@@ -117,7 +117,7 @@ class Vec2 {
 	}
 
 	equals(other) {
-		if (other instanceof Vec3)
+		if (other instanceof ESVec2)
 			return this.x == other.x && 
 			       this.y == other.y;
 		return false;

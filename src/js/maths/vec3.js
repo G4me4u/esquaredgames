@@ -1,5 +1,6 @@
 
-class Vec3 {
+class ESVec3 {
+
 	constructor(x = 0.0, y = 0.0, z = 0.0) {
 		this.x = x;
 		this.y = y;
@@ -148,7 +149,7 @@ class Vec3 {
 	}
 	
 	equals(other) {
-		if (other instanceof Vec3)
+		if (other instanceof ESVec3)
 			return this.x == other.x && 
 			       this.y == other.y &&
 			       this.z == other.z;

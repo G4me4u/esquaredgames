@@ -1,5 +1,5 @@
 
-class Input {
+class ESInput {
 	
 	constructor(name, control) {
 		this.name = name;

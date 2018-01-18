@@ -1,5 +1,5 @@
 
-class Timer {
+class ESTimer {
 
 	constructor(tps, debug=false) {
 		this.tps = tps;

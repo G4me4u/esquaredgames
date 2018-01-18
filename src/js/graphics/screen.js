@@ -1,5 +1,5 @@
 
-class Screen {
+class ESScreen {
 	
 	constructor(canvas, width, height) {
 		this.canvas = canvas;
@@ -8,7 +8,7 @@ class Screen {
 		this.width = width;
 		this.height = height;
 
-		this.pixels = makeArray(width * height, COLOR_BLACK);
+		this.pixels = Array.makeArray(width * height, COLOR_BLACK);
 	}
 
 	setPixel(px, py, color) {

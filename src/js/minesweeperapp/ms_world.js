@@ -1,5 +1,5 @@
 
-class MSWorld extends World {
+class MSWorld extends ESWorld {
 
 	constructor(app) {
 		super(app);
@@ -12,10 +12,10 @@ class MSWorld extends World {
 		];
 
 		this.dirs = [ 
-			new Vec2( 0, -1),
-			new Vec2( 1,  0),
-			new Vec2( 0,  1),
-			new Vec2(-1,  0)
+			new ESVec2( 0, -1),
+			new ESVec2( 1,  0),
+			new ESVec2( 0,  1),
+			new ESVec2(-1,  0)
 		];
 	}
 
@@ -37,7 +37,7 @@ class MSWorld extends World {
 		this.tiles = [];
 
 		const numTiles = WIDTH * HEIGHT;
-		while (this.tiles.push(new MSTile()) < numTiles);
+		while (this.tiles.push(new MSTile()) < numTiles) { }
 
 		let bombCount = 0;
 		while (bombCount < MS_NUM_BOMBS) {
@@ -145,8 +145,8 @@ class MSWorld extends World {
 			for (let i = 0; i < this.controls.length; i++) {
 				if (this.app.controller.getInput(this.controls[i]).clicked()) {
 					const direction = this.dirs[i];
-					this.curX = clamp(0, WIDTH  - 1, this.curX + direction.x);
-					this.curY = clamp(0, HEIGHT - 1, this.curY + direction.y);
+					this.curX = Math.clamp(0, WIDTH  - 1, this.curX + direction.x);
+					this.curY = Math.clamp(0, HEIGHT - 1, this.curY + direction.y);
 
 					this.cursTimer = 0;
 
