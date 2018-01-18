@@ -20,8 +20,8 @@ class ESCursor {
 			new ESVec2(-1,  0)
 		];
 
-		this.x = 0;
-		this.y = 0;
+		this.x = WIDTH  >> 1;
+		this.y = HEIGHT >> 1;
 
 		this.cursTimer = 0;
 	}
