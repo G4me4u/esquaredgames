@@ -1,4 +1,4 @@
-const ENTITY_UNDEFINED = 0;
+const ENTITY_UNDEFINED = -1;
 
 class ESEntity {
 
