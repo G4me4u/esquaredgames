@@ -31,7 +31,7 @@ class ESController {
 			this.controls[control].update();
 	
 		while (this.events.length > 0) {
-			const event = this.events.pop(0);
+			const event = this.events.shift();
 			const input = this.controls[event.control];
 			input.setPressed(event.pressed, event.repeat, event.when);
 		}

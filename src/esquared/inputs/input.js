@@ -13,13 +13,11 @@ class ESInput {
 	}
 
 	setPressed(state, repeat, when) {
-		if (state) {
-			if (!this.wasReleased || !repeat) {	
-				this.when = when;
-				this.pressed = true;
-				this.wasPressed &= repeat;
-				this.wasReleased = false;
-			}
+		if (state) {	
+			this.when = when;
+			this.pressed = true;
+			this.wasPressed &= repeat;
+			this.wasReleased = false;
 		} else {
 			this.wasReleased = true;
 		}
