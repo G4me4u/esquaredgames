@@ -1,5 +1,5 @@
 
-class MSWorld extends ESWorld {
+class MSWorld extends ESTileWorld {
 
 	constructor(app) {
 		super(app);
@@ -12,17 +12,16 @@ class MSWorld extends ESWorld {
 		
 		this.cursor = new ESCursor(this.app, MS_CURS_COLOR, MS_CURSOR_TOGGLE);
 		this.cursor.setPos(WIDTH >> 1, HEIGHT >> 1);
-
-		this.initTiles(this.cursor.x, this.cursor.y);
 	
-		this.gameOverAnim = 20;
+		this.gameOverAnim = TPS;
 	}
 
-	initTiles(xd, yd) {
-		this.tiles = [];
+	createTile() {
+		return new MSTile();
+	}
 
-		const numTiles = WIDTH * HEIGHT;
-		while (this.tiles.push(new MSTile()) < numTiles) { }
+	initTiles(xd=0, yd=0) {
+		super.initTiles();
 
 		let bombCount = 0;
 		while (bombCount < MS_NUM_BOMBS) {
@@ -146,25 +145,7 @@ class MSWorld extends ESWorld {
 	}
 
 	renderGame() {
-		let i = 0;
-		for (let y = 0; y < HEIGHT; y++) {
-			for (let x = 0; x < WIDTH; x++) {
-				const tile = this.tiles[i++];
-				
-				let color = COLOR_BLACK;
-				if (tile.visible) {
-					if (tile.bomb) {
-						color = MS_BOMB_COLOR;
-					} else if (tile.numSurrounding > 0) {
-						color = MS_SURROUNDING_COLORS[tile.numSurrounding - 1];
-					}
-				} else {
-					color = tile.flag ? MS_FLAG_COLOR : MS_TILE_COLOR;
-				}
-
-				this.app.setPixel(x, y, color);
-			}
-		}
+		super.renderGame();
 
 		if (this.flagTimer == 0)
 			this.cursor.render();
