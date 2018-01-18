@@ -1,5 +1,5 @@
 
-class ESTileWorld extends World {
+class ESTileWorld extends ESWorld {
 
 	constructor(app) {
 		super(app)
