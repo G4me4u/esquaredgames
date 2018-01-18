@@ -1,0 +1,1 @@
+java -jar closure-compiler.jar --js  src/esquared --js_output_file src/esquared.min.js
