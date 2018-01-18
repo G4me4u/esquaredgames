@@ -23,9 +23,14 @@ class ESDirection {
 	}
 }
 
-const DIR_UP    = new ESDirection("up",    0, 2, 1, 3);
-const DIR_RIGHT = new ESDirection("right", 1, 3, 2, 0);
-const DIR_DOWN  = new ESDirection("down",  2, 0, 3, 1);
-const DIR_LEFT  = new ESDirection("left",  3, 1, 0, 2);
+const DIRECTION_UP    = new ESDirection("up",    0, 2, 1, 3);
+const DIRECTION_RIGHT = new ESDirection("right", 1, 3, 2, 0);
+const DIRECTION_DOWN  = new ESDirection("down",  2, 0, 3, 1);
+const DIRECTION_LEFT  = new ESDirection("left",  3, 1, 0, 2);
 
-const directions = [ DIR_UP, DIR_RIGHT, DIR_DOWN, DIR_LEFT ];
+const directions = [ 
+	DIRECTION_UP, 
+	DIRECTION_RIGHT, 
+	DIRECTION_DOWN, 
+	DIRECTION_LEFT 
+];
