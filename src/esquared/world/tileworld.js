@@ -7,28 +7,26 @@ class ESTileWorld extends ESWorld {
 
 	reset() {
 		super.reset();
+		
+		this.initTiles();
+	}
 
+	initTiles() {
 		this.tiles = [];
-
+		
 		const numTiles = WIDTH * HEIGHT;
 		while (this.tiles.length < numTiles) 
 			this.tiles.push(this.createTile());
 	}
 
 	createTile() {
-		return new Tile();
+		return new ESTile();
 	}
 
 	renderGame() {
 		let i = 0;
-
-		for (let yp = 0; yp < HEIGHT; yp++) {
-			for (let xp = 0; xp < WIDTH; xp++) {
-				const tile = this.tiles[i++];
-				if (tile.selected) {
-					tile.render(this.app, xp, yp, LO_SELECT_COLOR);
-				}
-			}
-		}
+		for (let yp = 0; yp < HEIGHT; yp++) 
+			for (let xp = 0; xp < WIDTH; xp++) 
+				this.tiles[i++].render(this.app, xp, yp);
 	}
 }
