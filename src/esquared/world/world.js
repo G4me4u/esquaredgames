@@ -36,9 +36,12 @@ class ESWorld {
 
 	removeEntity(entity) {
 		const len = this.entities.length;
-		for (let i = 0; i < len; i++)
-			if (this.entities[i] == entity)
-				this.entities.pop(i);
+		for (let i = 0; i < len; i++) {
+			if (this.entities[i] == entity) {
+				this.entities.splice(i, 1);
+				break;
+			}
+		}
 	}
 
 	isColliding(entity, type=ENTITY_UNDEFINED) {
@@ -63,9 +66,9 @@ class ESWorld {
 		while (i >= 0) {
 			const ent = this.entities[i];
 			ent.update();
-			if (ent.dead) {
+			if (ent.dead)
 				this.entities.pop(i);
-			} else i--;
+			i--;
 		}
 	}
 
