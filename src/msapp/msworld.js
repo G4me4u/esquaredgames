@@ -50,14 +50,6 @@ class MSWorld extends ESTileWorld {
 		}
 	}
 
-	getTile(xt, yt) {
-		if (xt < 0 || xt >= WIDTH)
-			return null;
-		if (yt < 0 || yt >= HEIGHT)
-			return null;
-		return this.tiles[xt + yt * WIDTH];
-	}
-
 	isBomb(xt, yt) {
 		let t;
 		return (t = this.getTile(xt, yt)) && t.bomb;

@@ -17,14 +17,6 @@ class LOWorld extends ESTileWorld {
 		return new LOTile(Math.random() > 0.5);
 	}
 
-	getTile(xt, yt) {
-		if (xt < 0 || xt >= WIDTH)
-			return null;
-		if (yt < 0 || yt >= HEIGHT)
-			return null;
-		return this.tiles[xt + yt * WIDTH];
-	}
-
 	toggleTile(xt, yt) {
 		const t = this.getTile(xt, yt);
 		if (t != null)
