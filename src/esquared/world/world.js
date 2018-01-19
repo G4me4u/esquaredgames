@@ -4,14 +4,6 @@ class ESWorld {
 	constructor(app) {
 		this.app = app;
 
-		this.entities = null;
-
-		this.gameOver = false;
-		this.wonGame = false;
-
-		this.time = 0;
-		this.gameOverAnim = 4;
-
 		this.reset();
 	}
 
@@ -22,10 +14,10 @@ class ESWorld {
 		this.wonGame = false;
 
 		this.time = 0;
-		this.gameOverAnim = 4;
+		this.gameOverAnim = TPS;
 	}
 
-	setGameOver(win) {
+	setGameOver(win=false) {
 		this.gameOver = true;
 		this.wonGame = win;
 	}
