@@ -14,9 +14,13 @@ class ESEntity {
 
 	update() {
 		if (this.pos.x < 0 || this.pos.x >= WIDTH)
-			this.setDead();
+			this.outOfBounds();
 		if (this.pos.y < 0 || this.pos.y >= HEIGHT)
-			this.setDead();
+			this.outOfBounds();
+	}
+
+	outOfBounds() {
+		this.setDead();
 	}
 
 	collides(entity) {
