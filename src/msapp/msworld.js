@@ -22,19 +22,22 @@ class MSWorld extends ESTileWorld {
 	}
 
 	generateBombs(xd, yd) {
+		const clearOffset = (MS_MIN_START_SIZE >> 1) + 1;
+
 		let bombCount = 0;
 		while (bombCount < MS_NUM_BOMBS) {
 			const x = Math.floor(Math.random() * WIDTH);
 			const y = Math.floor(Math.random() * HEIGHT);
 			
-			if (x != xd || y != yd) {
-				const index = x + y * WIDTH;
+			if (x >= xd - clearOffset && x <= xd + clearOffset && 
+				y >= yd - clearOffset && y <= yd + clearOffset) continue;
 
-				const tile = this.tiles[index];
-				if (!tile.bomb) {
-					tile.bomb = true;
-					bombCount++;
-				}
+			const index = x + y * WIDTH;
+
+			const tile = this.tiles[index];
+			if (!tile.bomb) {
+				tile.bomb = true;
+				bombCount++;
 			}
 		}
 

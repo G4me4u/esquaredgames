@@ -1,7 +1,8 @@
-const MS_CURSOR_TOGGLE = 16;
-const MS_NUM_BOMBS     =  8;
+const MS_CURSOR_TOGGLE  = 16;
+const MS_NUM_BOMBS      =  8;
+const MS_MIN_START_SIZE =  7;
 
-const MS_FLAG_DELAY    = 10;
+const MS_FLAG_DELAY     = 10;
 
 const MS_TILE_COLOR = new ESColor(218, 218, 218);
 const MS_BOMB_COLOR = new ESColor( 64,  64,  64);
