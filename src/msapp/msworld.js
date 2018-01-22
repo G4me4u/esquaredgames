@@ -22,7 +22,7 @@ class MSWorld extends ESTileWorld {
 	}
 
 	generateBombs(xd, yd) {
-		const clearOffset = (MS_MIN_START_SIZE >> 1) + 1;
+		const clearOffset = MS_MIN_START_SIZE >> 1;
 
 		let bombCount = 0;
 		while (bombCount < MS_NUM_BOMBS) {
