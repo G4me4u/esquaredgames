@@ -7,23 +7,20 @@ const KEY_LEFT   = 4;
 class ESController {
 
 	constructor() {
-		this.codeToControl = {
-			32: KEY_MIDDLE,
-			38: KEY_UP,
-			39: KEY_RIGHT,
-			40: KEY_DOWN,
-			37: KEY_LEFT
-		};
-
-		this.controls = {
-			0: new ESInput("middle", KEY_MIDDLE),
-			1: new ESInput("up", KEY_UP),
-			2: new ESInput("right", KEY_RIGHT),
-			3: new ESInput("down", KEY_DOWN),
-			4: new ESInput("left", KEY_LEFT)
-		};
-
+		this.codeToControl = {};
+		this.controls = {};
 		this.events = [];
+		
+		this.addControl("middle", KEY_MIDDLE, 32);
+		this.addControl("up", KEY_UP, 38);
+		this.addControl("right", KEY_RIGHT, 39);
+		this.addControl("down", KEY_DOWN, 40);
+		this.addControl("left", KEY_LEFT, 37);
+	}
+
+	addControl(name, control, keyCode) {
+		this.controls[control] = new ESInput(name, control);
+		this.codeToControl[keyCode] = control;
 	}
 
 	update() {
