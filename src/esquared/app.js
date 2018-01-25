@@ -6,6 +6,7 @@ class ESApp {
 
 		this.screen = null;
 		this.controller = null;
+		this.menu = null;
 	
 		this.running = false;
 	}
@@ -22,10 +23,23 @@ class ESApp {
 		this.screen = new ESScreen(canvas, WIDTH, HEIGHT);
 		this.controller = new ESController();
 
+		this.menu = null;
+
 		document.addEventListener("keydown", (event) => this.controller.handleEvent(event, true ));
 		document.addEventListener("keyup",   (event) => this.controller.handleEvent(event, false));
 
 		return true;
+	}
+
+	setMenu(menu) {
+		if (this.menu != null) {
+			tmpMenu = this.menu;
+			this.menu = null;
+			tmpMenu.exitMenu();
+		}
+		
+		this.menu = menu;
+		this.menu.enterMenu();
 	}
 
 	start() {
@@ -48,14 +62,15 @@ class ESApp {
 		this.timer.clock();
 
 		while (this.timer.missingTicks > 0) {
-			this.controller.update();
+			this.preupdate();
 			this.update();
+			this.postupdate();
 			this.timer.tickPassed();
 		}
 
-		this.clear();
+		this.prerender();
 		this.render();
-		this.screen.drawToScreen();
+		this.postrender();
 		this.timer.framePassed();
 
 		this.timer.timeout(() => this.loop(), FPS);
@@ -79,9 +94,31 @@ class ESApp {
 		this.timer.incrementTps(deltaTps);
 	}
 
+	preupdate() {
+		this.controller.update();
+		
+		if (this.menu != null)
+			this.menu.update();
+	}
+
 	update() {
+		
+	}
+
+	postupdate() {
+	}
+
+	prerender() {
+		this.clear();
+
+		if (this.menu != null)
+			this.menu.render();
 	}
 
 	render() {
+	}
+
+	postrender() {
+		this.screen.drawToScreen();
 	}
 }
