@@ -53,17 +53,16 @@ class SnakeWorld extends ESWorld {
 	}
 
 	update() {
+		super.update();
+
 		if (!this.gameOver) {
 			const won = this.hasWon();
 			if (won || this.player.dead) {
 				this.setGameOver(won);
-				this.app.setTps(SNAKE_GAMEOVER_TPS);
+				this.app.setTps(TPS);
 			}
 		} else if (this.app.controller.getInput(KEY_MIDDLE).clicked()){
 			this.reset();
-			return;
 		}
-
-		super.update();
 	}
 }
