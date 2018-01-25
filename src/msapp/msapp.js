@@ -3,24 +3,14 @@ class MSApp extends ESApp {
 
 	constructor() {
 		super();
-
-		this.world = null;
 	}
 
 	init() {
 		super.init();
 
-		this.world = new MSWorld(this);
+		this.setMenu(new ESWorldMenu(this, new MSWorld(this)));
 	
 		return true;
-	}
-
-	update() {
-		this.world.update();
-	}
-
-	render() {
-		this.world.render();
 	}
 }
 

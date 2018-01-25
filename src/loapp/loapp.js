@@ -1,28 +1,17 @@
 
 class LOApp extends ESApp {
-	
-		constructor() {
-			super();
-	
-			this.world = null;
-		}
-	
-		init() {
-			super.init();
-	
-			this.world = new LOWorld(this);
-		
-			return true;
-		}
-	
-		update() {
-			this.world.update();
-		}
-	
-		render() {
-			this.world.render();
-		}
+
+	constructor() {
+		super();
 	}
+
+	init() {
+		super.init();
+
+		this.setMenu(new ESWorldMenu(new LOWorld(this)));
 	
-	new LOApp().start();
-	
+		return true;
+	}
+}
+
+new LOApp().start();
