@@ -12,10 +12,18 @@ class ESScreen {
 	}
 
 	setPixel(px, py, color) {
+		if (px < 0 || px >= this.width )
+			return;
+		if (py < 0 || py >= this.height)
+			return;
 		this.pixels[px + py * this.width] = color ? color : COLOR_BLACK;
 	}
 
 	getPixel(px, py) {
+		if (px < 0 || px >= this.width )
+			return null;
+		if (py < 0 || py >= this.height)
+			return null;
 		return this.pixels[px + py * this.width];
 	}
 
@@ -28,9 +36,10 @@ class ESScreen {
 
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-		for (let px = 0; px < this.width; px++) {
-			for (let py = 0; py < this.height; py++) {
-				let color = this.getPixel(px, py);
+		let i = 0;
+		for (let py = 0; py < this.height; py++) {
+			for (let px = 0; px < this.width; px++) {
+				const color = this.pixels[i++];
 				
 				const cx = px * d + r + PIXEL_MARGIN;
 				const cy = py * d + r + PIXEL_MARGIN;
