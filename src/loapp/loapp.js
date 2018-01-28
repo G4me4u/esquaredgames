@@ -8,7 +8,7 @@ class LOApp extends ESApp {
 	init() {
 		super.init();
 
-		this.setMenu(new ESWorldMenu(new LOWorld(this)));
+		this.setMenu(new ESWorldMenu(this, new LOWorld(this)));
 	
 		return true;
 	}
